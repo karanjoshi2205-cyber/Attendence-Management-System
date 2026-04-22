@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// Structure to store attendance data struct Attendance 
     { int id;
     char name[50];
     char date[15];
-    char status[10]; }
+    char status[10]; };
