@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-    { int id;
+    struct attendence {
+    int id;
     char name[50];
     char date[15];
     char status[10]; };
