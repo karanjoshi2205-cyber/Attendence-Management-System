@@ -90,3 +90,64 @@ void viewRecords()
 
     fclose(fp);
 }
+void searchByID() {
+    FILE *fp = fopen("attendance.txt", "r");
+
+    int id, searchID, d, m, y, found = 0;
+    char name[50], status[10];
+
+    if (fp == NULL) {
+        printf("No records found!\n");
+        return;
+    }
+
+    printf("\nEnter ID to search: ");
+    scanf("%d", &searchID);
+
+    while (fscanf(fp, "%d %s %d-%d-%d %s",
+                  &id, name, &d, &m, &y, status) != EOF) {
+
+        if (id == searchID) {
+            printf("\nRecord Found:\n");
+            printf("ID: %d\nName: %s\nDate: %02d-%02d-%d\nStatus: %s\n",
+                   id, name, d, m, y, status);
+            found = 1;
+        }
+    }
+
+    if (!found)
+        printf("No record found!\n");
+
+    fclose(fp);
+}
+
+void searchByDate() {
+    FILE *fp = fopen("attendance.txt", "r");
+
+    int id, d, m, y, sd, sm, sy, found = 0;
+    char name[50], status[10];
+
+    if (fp == NULL) {
+        printf("No records found!\n");
+        return;
+    }
+
+    printf("\nEnter Date (DD MM YYYY): ");
+    scanf("%d %d %d", &sd, &sm, &sy);
+
+    while (fscanf(fp, "%d %s %d-%d-%d %s",
+                  &id, name, &d, &m, &y, status) != EOF) {
+
+        if (d == sd && m == sm && y == sy) {
+            printf("\nRecord Found:\n");
+            printf("ID: %d\nName: %s\nStatus: %s\n",
+                   id, name, status);
+            found = 1;
+        }
+    }
+
+    if (!found)
+        printf("No records found!\n");
+
+    fclose(fp);
+}
