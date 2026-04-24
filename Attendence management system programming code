@@ -1,8 +1,92 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-    struct Attendance {
+
+struct Date
+{
+    int day;
+    int month;
+    int year;
+};
+struct Attendance
+{
     int id;
     char name[50];
-    char date[15];
-    char status[10]; }
+    struct Date d;
+    char status[10];
+};
+void markAttendance()
+{
+    FILE *fp = fopen("attendance.txt", "a");
+
+    struct Attendance a;
+    int n, i;
+
+    if (fp == NULL)
+    {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    printf("\nEnter number of students: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+    {
+        printf("\n--- Student %d ---\n", i + 1);
+
+        printf("Enter ID: ");
+        scanf("%d", &a.id);
+
+        printf("Enter Name: ");
+        scanf("%s", a.name);
+
+        printf("Enter Date (DD MM YYYY): ");
+        scanf("%d %d %d", &a.d.day, &a.d.month, &a.d.year);
+
+        printf("Enter Status (Present/Absent): ");
+        scanf("%s", a.status);
+
+        if (strcmp(a.status, "Present") != 0 && strcmp(a.status, "Absent") != 0)
+        {
+            printf("Invalid status! Enter Present or Absent.\n");
+            i--;
+            continue;
+        }
+
+        fprintf(fp, "%d %s %d-%d-%d %s\n",
+                a.id, a.name,
+                a.d.day, a.d.month, a.d.year,
+                a.status);
+    }
+
+    fclose(fp);
+
+    printf("\nAttendance recorded successfully!\n");
+}
+
+void viewRecords()
+{
+    FILE *fp = fopen("attendance.txt", "r");
+
+    int id, d, m, y;
+    char name[50], status[10];
+
+    if (fp == NULL)
+    {
+        printf("No records found!\n");
+        return;
+    }
+
+    printf("\n--- Attendance Records ---\n");
+
+    while (fscanf(fp, "%d %s %d-%d-%d %s",
+                  &id, name, &d, &m, &y, status) != EOF)
+    {
+
+        printf("\nID: %d\nName: %s\nDate: %02d-%02d-%d\nStatus: %s\n",
+               id, name, d, m, y, status);
+    }
+
+    fclose(fp);
+}
