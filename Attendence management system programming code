@@ -184,3 +184,39 @@ void teacherPanel() {
 
     } while (choice != 2);
 }
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n===== Attendance Management System =====\n");
+        printf("1. Teacher Panel\n");
+        printf("2. View Records\n");
+        printf("3. Search by ID\n");
+        printf("4. Search by Date\n");
+        printf("5. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                teacherPanel();
+                break;
+            case 2:
+                viewRecords();
+                break;
+            case 3:
+                searchByID();
+                break;
+            case 4:
+                searchByDate();
+                break;
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
