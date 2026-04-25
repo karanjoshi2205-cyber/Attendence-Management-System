@@ -151,3 +151,36 @@ void searchByDate() {
 
     fclose(fp);
 }
+void teacherPanel() {
+    int pass, choice;
+
+    printf("\n--- Teacher Login ---\n");
+    printf("Enter Password: ");
+    scanf("%d", &pass);
+
+    if (pass != 1234) {
+        printf("Wrong Password!\n");
+        return;
+    }
+
+    printf("Login Successful!\n");
+
+    do {
+        printf("\n--- Teacher Menu ---\n");
+        printf("1. Mark Attendance\n");
+        printf("2. Back\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                markAttendance();
+                break;
+            case 2:
+                break;
+            default:
+                printf("Invalid choice!\n");
+        }
+
+    } while (choice != 2);
+}
